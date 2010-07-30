@@ -7,7 +7,7 @@ Easily calculate load orders between objects
 ===Basic Usage
 
     class Thing
-      include Dependable::Dependency
+      include Dependable
     end
 
     thing1 = Thing.new

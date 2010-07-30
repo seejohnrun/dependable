@@ -1,9 +1,8 @@
 require File.join(File.dirname(__FILE__), '..', '..', 'lib', 'dependable')
-include Dependable
 
 class Thing
 
-  include Dependency
+  include Dependable
   
   def initialize(*dependencies)
     self.dependencies = dependencies
