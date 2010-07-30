@@ -1,4 +1,4 @@
-require 'lib/locale_base/version'
+require 'lib/dependable/version'
 
 spec = Gem::Specification.new do |s|
   

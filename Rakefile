@@ -1,5 +1,5 @@
 require 'spec/rake/spectask'
-require 'lib/locale_base/version'
+require 'lib/dependable/version'
  
 task :build => :test do
   system "gem build dependable.gemspec"
