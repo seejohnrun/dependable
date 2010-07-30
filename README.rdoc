@@ -4,6 +4,21 @@ Easily calculate load orders between objects
 
 ---
 
+===Basic Usage
+
+    class Thing
+      include Dependable::Dependency
+    end
+
+    thing1 = Thing.new
+
+    thing2 = Thing.new
+    thing2.dependencies = [thing1]
+
+    thing2.load_path # => [thing1, thing2]
+
+---
+
 ===License
 
 (The MIT License)
