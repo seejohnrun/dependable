@@ -13,7 +13,7 @@ Easily calculate load orders between objects
     thing1 = Thing.new
 
     thing2 = Thing.new
-    thing2.dependencies = [thing1]
+    thing2.needs thing1
 
     thing2.load_path # => [thing1, thing2]
 
