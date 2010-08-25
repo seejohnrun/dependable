@@ -27,7 +27,7 @@ module Dependable
     load.uniq!
     load
   end
-  
+
   def print_load_path(include_self = true)
     load = self.load_path(include_self)
     load.each_with_index do |thing, index|
