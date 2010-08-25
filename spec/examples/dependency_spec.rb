@@ -47,6 +47,16 @@ describe 'Dependable' do
     thing.should respond_to(:print_load_path)
   end
 
+  it 'should allow something to need two things, one of which needs the other - and negotitate this correctly' do
+    thing = Thing.new
+    thing1b = Thing.new
+    thing1a = Thing.new
+    thing1b.needs thing1a
+    thing.needs thing1b, thing1a
+    thing.load_path.should == [thing1a, thing1b, thing]
+    thing.load_path(false).should == [thing1a, thing1b]
+  end
+  
 #  it 'should raise an error for mutual dependencies' do
 #    thing1 = Thing.new
 #    thing2 = Thing.new

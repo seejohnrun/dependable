@@ -1,12 +1,16 @@
 module Dependable
   
-  def dependencies=(dependencies)
+  def dependencies=(dependencies = nil)
     raise ArgumentError.new('Dependencies must be enumerable') unless dependencies.kind_of?(Enumerable) # TODO debatable whether this should be here
-    @dependencies = dependencies
+    @dependencies = dependencies || []
   end
   
   def dependencies
-    @dependencies || []
+    @dependencies
+  end
+
+  def needs(*things)
+    @dependencies.concat things
   end
   
   def load_path(include_self = true)
