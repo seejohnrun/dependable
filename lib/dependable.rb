@@ -1,16 +1,21 @@
 module Dependable
-  
-  def dependencies=(dependencies = nil)
-    raise ArgumentError.new('Dependencies must be enumerable') unless dependencies.kind_of?(Enumerable) # TODO debatable whether this should be here
-    @dependencies = dependencies || []
+
+  attr_reader :dependencies
+
+  def clear_dependencies
+    @dependencies = []
   end
   
-  def dependencies
-    @dependencies
+  def needs(*things)
+    raise DependencyError.new("Circular Dependency Detected") if things.any? { |thing| thing.dependent_on?(self) }
+    @dependencies ||= []
+    @dependencies.concat things
   end
 
-  def needs(*things)
-    @dependencies.concat things
+  # Bad recursive performance - should use trees
+  def dependent_on?(thing)
+    return true if self == thing
+    @dependencies && @dependencies.any? { |d| d.dependent_on?(thing) }
   end
   
   def load_path(include_self = true)
@@ -30,6 +35,9 @@ module Dependable
       print " (requires: #{thing.dependencies.join(',')})" unless thing.dependencies.empty?
       puts
     end
+  end
+
+  class DependencyError < ArgumentError
   end
   
 end

@@ -5,7 +5,7 @@ class Thing
   include Dependable
   
   def initialize(*dependencies)
-    self.dependencies = dependencies
+    self.needs *dependencies
   end
   
 end
